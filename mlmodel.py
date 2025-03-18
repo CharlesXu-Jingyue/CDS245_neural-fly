@@ -8,7 +8,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils import data
-torch.set_default_tensor_type('torch.DoubleTensor')
+# torch.set_default_tensor_type('torch.DoubleTensor')
+torch.set_default_dtype(torch.float64)
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.dataset import random_split
 
@@ -95,9 +96,10 @@ class MyDataset(Dataset):
     def __getitem__(self, idx):
         Input = self.inputs[idx,]
         output = self.outputs[idx,]
-        sample = {'input': Input, 'output': output, 'c': self.c}
+        # sample = {'input': Input, 'output': output, 'c': self.c}
 
-        return sample
+        # return sample
+        return Input, output, self.c
 
 
 _softmax = nn.Softmax(dim=1)
